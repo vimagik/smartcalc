@@ -1,22 +1,57 @@
 <template>
   <v-container class="my-lg-auto">
     <v-row>
-      <v-col align="center">
-        <v-card max-width="500">
+      <v-col>
+        <v-card max-width="500" class="mx-auto">
+          <v-img
+              height="250"
+              src="https://ichef.bbci.co.uk/news/640/cpsprodpb/164EE/production/_109347319_gettyimages-611195980.jpg"
+          ></v-img>
+          <div class="pa-2 pt-6 pb-6">
 
-          <div class="text-h5">Приветствую тебя, мой дорогой друг</div>
-          <spacer></spacer>
+            <div class="text-h5 text-center">Приветствую тебя, мой дорогой друг</div>
 
+            <v-form ref="form" class="pl-10 pr-10">
+              <v-text-field
+                  v-model="login"
+                  label="Твое имя"
+                  required
+              ></v-text-field>
+
+              <v-radio-group v-model="operationType" row>
+                <v-radio label="Сложение" value="+"></v-radio>
+                <v-radio label="Умножение" value="*"></v-radio>
+              </v-radio-group>
+
+              <v-text-field
+                  v-model="numberOfExamples"
+                  label="Сколько примеров ты хочешь решить?"
+                  type="number"
+                  required
+              ></v-text-field>
+
+              <v-btn :disabled="false" color="success">
+                Поехали
+              </v-btn>
+
+            </v-form>
+          </div>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
-
 </template>
 
 <script>
 export default {
-  name: "Main"
+  name: "Main",
+  data() {
+    return {
+      login: null,
+      operationType: null,
+      numberOfExamples: 0
+    }
+  }
 }
 </script>
 
