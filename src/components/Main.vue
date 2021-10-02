@@ -30,9 +30,11 @@
                   required
               ></v-text-field>
 
-              <v-btn :disabled="false" color="success">
-                Поехали
+              <v-btn :disabled="statusButton" color="success"
+              @click="GoToCalcPage">
+                  Поехали
               </v-btn>
+
 
             </v-form>
           </div>
@@ -47,10 +49,27 @@ export default {
   name: "Main",
   data() {
     return {
-      login: null,
-      operationType: null,
+      login: '',
+      operationType: '',
       numberOfExamples: 0
     }
+  },
+  methods: {
+    GoToCalcPage() {
+      this.$router.push({
+        name: 'Quiz',
+        query: {
+          login: this.login,
+          operationType: this.operationType,
+          numberOfExamples: this.numberOfExamples
+        }
+      });
+    }
+  },
+  computed: {
+    statusButton() {
+      return this.login === '' || this.operationType === '' || this.numberOfExamples === 0 ? true : false;
+   }
   }
 }
 </script>
