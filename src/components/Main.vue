@@ -68,7 +68,7 @@ export default {
   },
   computed: {
     statusButton() {
-      return this.login === '' || this.operationType === '' || this.numberOfExamples === 0 ? true : false;
+      return this.login === '' || this.operationType === '' || this.numberOfExamples === 0;
    }
   }
 }

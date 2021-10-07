@@ -67,9 +67,9 @@ export default {
   methods: {
     processResponse() {
       if (this.operation === '*') {
-        this.correctResponse = this.firstNumber * this.secondNumber === Number(this.inputResult) ? true : false;
+        this.correctResponse = (this.firstNumber * this.secondNumber) === Number(this.inputResult);
       } else {
-        this.correctResponse = this.firstNumber + this.secondNumber === Number(this.inputResult) ? true : false;
+        this.correctResponse = (this.firstNumber + this.secondNumber) === Number(this.inputResult);
       }
       this.replyReceived = true;
       this.$emit('sendresult', this.correctResponse);
@@ -78,7 +78,7 @@ export default {
     firstInit() {
       if (this.operation === '*') {
         this.firstNumber = this.getRandomInt(0, 10);
-        this.secondNumber = 2;
+        this.secondNumber = this.getRandomInt(2, 4);
       } else {
         this.firstNumber = this.getRandomInt(0, 15);
         this.secondNumber = this.getRandomInt(0, 15);

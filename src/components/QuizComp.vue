@@ -97,7 +97,9 @@ export default {
   ,
   methods: {
     returnToMain() {
-      this.$router.go(-1);
+      this.$router.push({
+        name: 'Main'
+      });
     },
     startQuiz() {
       this.exercises.push({
