@@ -1,50 +1,54 @@
 <template>
-  <tr>
-    <td>
-      <v-icon large color="blue darken-1">mdi-numeric-{{ number }}-box</v-icon>
-    </td>
-    <td class="text-h6">{{ firstNumber }}</td>
-    <td class="text-h6">{{ operation }}</td>
-    <td class="text-h6">{{ secondNumber }}</td>
-    <td class="text-h6">=</td>
-    <td>
-      <v-text-field
-          v-model="inputResult"
-          class="mt-6"
-          label="Ответ"
-          outlined
-          dense
-          :disabled="replyReceived"
-          @keydown.enter="processResponse"
-      ></v-text-field>
-    </td>
-    <td>
-      <v-btn v-if="!replyReceived"
-             color="primary"
-             elevation="2"
-             fab
-             small
-             @click="processResponse"
-             :disabled="!inputResult"
-      >
-        <v-icon>mdi-check-all</v-icon>
-      </v-btn>
-      <template v-else>
-        <v-alert v-if="correctResponse"
-            class="mt-3"
-            type="success"
+  <transition appear name="fade" >
+    <tr>
+      <td class="">
+        <v-icon class="d-inline" v-if="firstOrdinalNumber" large color="blue darken-1" >mdi-numeric-{{ firstOrdinalNumber }}-box</v-icon>
+        <v-icon class="d-inline" large color="blue darken-1" >mdi-numeric-{{ secondOrdinalNumber }}-box</v-icon>
+      </td>
+      <td class="text-h6">{{ firstNumber }}</td>
+      <td class="text-h6">{{ operation }}</td>
+      <td class="text-h6">{{ secondNumber }}</td>
+      <td class="text-h6">=</td>
+      <td>
+        <v-text-field
+            v-model="inputResult"
+            class="mt-6"
+            label="Ответ"
+            outlined
             dense
-            width="55"
-        ></v-alert>
-        <v-alert v-else
-            class="mt-3"
-            type="error"
-            dense
-            width="55"
-        ></v-alert>
-      </template>
-    </td>
-  </tr>
+            :disabled="replyReceived"
+            @keydown.enter="processResponse"
+            ref="result"
+        ></v-text-field>
+      </td>
+      <td>
+        <v-btn v-if="!replyReceived"
+               color="primary"
+               elevation="2"
+               fab
+               small
+               @click="processResponse"
+               :disabled="!inputResult"
+        >
+          <v-icon>mdi-check-all</v-icon>
+        </v-btn>
+        <template v-else>
+          <v-alert v-if="correctResponse"
+                   class="mt-3"
+                   type="success"
+                   dense
+                   width="55"
+          ></v-alert>
+          <v-alert v-else
+                   class="mt-3"
+                   type="error"
+                   dense
+                   width="55"
+          ></v-alert>
+        </template>
+      </td>
+    </tr>
+  </transition>
 </template>
 
 <script>
@@ -89,14 +93,36 @@ export default {
       min = Math.ceil(min);
       max = Math.floor(max);
       return Math.floor(Math.random() * (max - min)) + min;
+    },
+
+    focusOnResult() {
+      this.$refs.result.focus();
     }
   },
+
   mounted() {
     this.firstInit();
+    this.focusOnResult();
+  },
+
+  computed: {
+    firstOrdinalNumber() {
+      const number = Math.trunc(Number(this.number) / 10);
+      return number >= 1 & Number(this.number) > 10 ? number : false;
+    },
+    secondOrdinalNumber() {
+      return Number(this.number) <= 10 ? this.number : Number(this.number) % 10;
+    }
   }
 }
 </script>
 
 <style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 1.5s;
+}
 
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 </style>

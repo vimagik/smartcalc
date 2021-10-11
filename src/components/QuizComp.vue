@@ -9,9 +9,11 @@
             <div class="text-h5 text-center">Приветствую тебя, {{ login }}!</div>
             <v-simple-table class="mt-10">
               <tbody>
+
               <exercise-comp v-for="item of exercises" :key="item.id" v-on:sendresult="collectResult"
                              :number="item.number"
                              :operation="operationType"/>
+
               </tbody>
             </v-simple-table>
 
@@ -66,7 +68,7 @@
 // [V] Кнопка, начать с начала
 // [V] Не давать нажимать кнопку, пока не ввели значение
 // [V] Красиво вывести итого
-// [ ] Добавить анимацию
+// [V] Добавить анимацию
 // [ ] Добавить вывод номера больше 10
 
 import ExerciseComp from "@/components/ExerciseComp";
