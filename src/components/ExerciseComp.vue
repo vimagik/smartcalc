@@ -1,9 +1,11 @@
 <template>
   <transition appear name="fade" >
     <tr>
-      <td class="">
-        <v-icon class="d-inline" v-if="firstOrdinalNumber" large color="blue darken-1" >mdi-numeric-{{ firstOrdinalNumber }}-box</v-icon>
-        <v-icon class="d-inline" large color="blue darken-1" >mdi-numeric-{{ secondOrdinalNumber }}-box</v-icon>
+      <td>
+        <v-layout justify-center>
+          <v-icon class="d-inline" v-if="firstOrdinalNumber" large color="blue darken-1" >mdi-numeric-{{ firstOrdinalNumber }}-box</v-icon>
+          <v-icon class="d-inline" large color="blue darken-1" >mdi-numeric-{{ secondOrdinalNumber }}-box</v-icon>
+        </v-layout>
       </td>
       <td class="text-h6">{{ firstNumber }}</td>
       <td class="text-h6">{{ operation }}</td>
