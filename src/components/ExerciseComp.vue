@@ -71,6 +71,7 @@ export default {
     }
   },
   methods: {
+
     processResponse() {
       if (this.operation === '*') {
         this.correctResponse = (this.firstNumber * this.secondNumber) === Number(this.inputResult);
