@@ -5,7 +5,7 @@
       <div class="pa-2 pt-6 pb-6">
 
         <div class="text-h5 text-center">Приветствую тебя, {{ login }}!</div>
-        <v-simple-table class="mt-10">
+        <v-simple-table>
           <tbody>
 
           <exercise-comp v-for="item of exercises" :key="item.id" v-on:sendresult="collectResult"

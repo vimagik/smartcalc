@@ -14,7 +14,7 @@
       <td>
         <v-text-field
             v-model="inputResult"
-            class="mt-6"
+            class="mt-6 inputClass"
             label="Ответ"
             outlined
             dense
@@ -127,5 +127,9 @@ export default {
 
 .fade-enter, .fade-leave-to {
   opacity: 0;
+}
+
+.inputClass {
+      min-width: 70px;
 }
 </style>
