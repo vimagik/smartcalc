@@ -10,18 +10,20 @@
 
           <exercise-comp v-for="item of exercises" :key="item.id" v-on:sendresult="collectResult"
                          :number="item.number"
-                         :operation="operationType"/>
+                         :operation="operationType"
+                         :mini="miniStatus"
+          />
 
           </tbody>
         </v-simple-table>
 
         <div class="pt-5" v-if="testIsFinished">
-          <v-btn @click="startQuiz">
+          <v-btn @click="startQuiz" class="ml-5 mb-3">
             Начать заново
           </v-btn>
 
-          <v-btn class="ml-5" color="primary" @click="returnToMain">
-            Вернуться на главный экран
+          <v-btn class="ml-5 mb-3" color="primary" @click="returnToMain">
+            Вернуться в начало
           </v-btn>
         </div>
 
@@ -63,14 +65,17 @@ import ExerciseComp from "@/components/ExerciseComp";
 
 export default {
   name: "QuizComp",
+
   components: {
     ExerciseComp
   },
+
   props: {
     login: String,
     operationType: String,
     numberOfExamples: String
   },
+
   data() {
     return {
       result: 0,
@@ -81,11 +86,27 @@ export default {
         }
       ],
       testIsFinished: false,
-      dialog: null
+      dialog: null,
+      windowWidth: 0
     }
-  }
-  ,
+  },
+
+  mounted() {
+    this.$nextTick(function () {
+      window.addEventListener('resize', this.getWindowWidth);
+      this.getWindowWidth();
+    })
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.getWindowWidth);
+  },
+
   methods: {
+
+    getWindowWidth() {
+      this.windowWidth = document.documentElement.clientWidth;
+    },
 
     returnToMain() {
       this.$router.push({
@@ -120,9 +141,13 @@ export default {
     }
   },
 
+  computed: {
+    miniStatus() {
+      return this.windowWidth < 440;
+    }
+  },
 }
 </script>
 
 <style scoped>
-
 </style>

@@ -1,17 +1,46 @@
 <template>
-  <transition appear name="fade" >
+  <transition appear name="fade">
     <tr>
       <td>
         <v-layout justify-center>
-          <v-icon class="d-inline" v-if="firstOrdinalNumber" large color="blue darken-1" >mdi-numeric-{{ firstOrdinalNumber }}-box</v-icon>
-          <v-icon class="d-inline" large color="blue darken-1" >mdi-numeric-{{ secondOrdinalNumber }}-box</v-icon>
+          <v-icon class="d-inline" v-if="firstOrdinalNumber" large color="blue darken-1">
+            mdi-numeric-{{ firstOrdinalNumber }}-box
+          </v-icon>
+          <v-icon class="d-inline" large color="blue darken-1">mdi-numeric-{{ secondOrdinalNumber }}-box</v-icon>
         </v-layout>
       </td>
-      <td class="text-h6">{{ firstNumber }}</td>
-      <td class="text-h6">{{ operation }}</td>
-      <td class="text-h6">{{ secondNumber }}</td>
-      <td class="text-h6">=</td>
-      <td>
+      <td class="text-h6"
+          :class="{
+            'px-1': mini
+          }"
+      >
+        {{ firstNumber }}
+      </td>
+      <td class="text-h6"
+          :class="{
+            'px-1': mini
+          }"
+      >
+        {{ operation }}
+      </td>
+      <td class="text-h6"
+          :class="{
+            'px-1': mini
+          }"
+      >
+        {{ secondNumber }}
+      </td>
+      <td class="text-h6"
+          :class="{
+            'px-1': mini
+          }"
+      >
+        =
+      </td>
+      <td :class="{
+            'px-1': mini
+          }"
+      >
         <v-text-field
             v-model="inputResult"
             class="mt-6 inputClass"
@@ -23,7 +52,9 @@
             ref="result"
         ></v-text-field>
       </td>
-      <td>
+      <td :class="{
+            'px-1': mini
+          }">
         <v-btn v-if="!replyReceived"
                color="primary"
                elevation="2"
@@ -58,7 +89,8 @@ export default {
   name: "ExerciseComp",
   props: {
     number: String,
-    operation: String
+    operation: String,
+    mini: Boolean
   },
   emits: ['sendresult'],
   data() {
@@ -111,7 +143,7 @@ export default {
   computed: {
     firstOrdinalNumber() {
       const number = Math.trunc(Number(this.number) / 10);
-      return number >= 1 & Number(this.number) > 10 ? number : false;
+      return number >= 1 && Number(this.number) > 10 ? number : false;
     },
     secondOrdinalNumber() {
       return Number(this.number) <= 10 ? this.number : Number(this.number) % 10;
@@ -130,6 +162,6 @@ export default {
 }
 
 .inputClass {
-      min-width: 70px;
+  min-width: 70px;
 }
 </style>
