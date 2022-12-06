@@ -117,10 +117,10 @@ export default {
     firstInit() {
       if (this.operation === '*') {
         this.firstNumber = this.getRandomInt(0, 10);
-        this.secondNumber = this.getRandomInt(2, 4);
+        this.secondNumber = this.getRandomInt(0, 10);
       } else {
-        this.firstNumber = this.getRandomInt(0, 15);
-        this.secondNumber = this.getRandomInt(0, 15);
+        this.firstNumber = this.getRandomInt(0, 50);
+        this.secondNumber = this.getRandomInt(0, 50);
       }
     },
 
