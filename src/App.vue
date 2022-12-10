@@ -5,7 +5,6 @@
     </div>
   </v-app>
 </template>
-
 <style>
 .main {
   background-image: linear-gradient(to right, #74ebd5 0%, #9face6 100%);
